@@ -125,11 +125,11 @@ public class ItemListOverlay implements IItemListOverlay, IShowsRecipeFocuses, I
 		final int yItemButtonSpace = getItemButtonYSpace();
 		final int itemButtonsHeight = rows * itemStackHeight;
 
-		final int buttonStartY = buttonSize + (2 * borderPadding) + (yItemButtonSpace - itemButtonsHeight) / 2;
+		final int buttonStartY = (2 * guiProperties.getScreenHeight() / 3) + buttonSize + (2 * borderPadding) + (yItemButtonSpace - itemButtonsHeight) / 2;
 		createItemButtons(guiItemStacks, guiAreas, leftEdge, buttonStartY, columns, rows);
 
-		nextButton = new GuiButtonExt(0, rightEdge - buttonSize, borderPadding, buttonSize, buttonSize, nextLabel);
-		backButton = new GuiButtonExt(1, leftEdge, borderPadding, buttonSize, buttonSize, backLabel);
+		nextButton = new GuiButtonExt(0, rightEdge - buttonSize, borderPadding + (2 * guiProperties.getScreenHeight() / 3), buttonSize, buttonSize, nextLabel);
+		backButton = new GuiButtonExt(1, leftEdge, borderPadding + (2 * guiProperties.getScreenHeight() / 3), buttonSize, buttonSize, backLabel);
 
 		int configButtonX = rightEdge - buttonSize + 1;
 		int configButtonY = guiProperties.getScreenHeight() - buttonSize - borderPadding;
@@ -265,7 +265,7 @@ public class ItemListOverlay implements IItemListOverlay, IShowsRecipeFocuses, I
 		}
 
 		GlStateManager.disableLighting();
-		
+
 		minecraft.fontRendererObj.drawString(pageNumDisplayString, pageNumDisplayX, pageNumDisplayY, Color.white.getRGB(), true);
 		searchField.drawTextBox();
 
@@ -305,7 +305,7 @@ public class ItemListOverlay implements IItemListOverlay, IShowsRecipeFocuses, I
 		if (!isOpen()) {
 			return;
 		}
-		
+
 		boolean mouseOver = isMouseOver(mouseX, mouseY);
 		if (mouseOver && shouldShowDeleteItemTooltip(minecraft)) {
 			String deleteItem = Translator.translateToLocal("jei.tooltip.delete.item");
@@ -476,7 +476,7 @@ public class ItemListOverlay implements IItemListOverlay, IShowsRecipeFocuses, I
 		if (guiProperties == null) {
 			return 0;
 		}
-		return guiProperties.getScreenHeight() - (buttonSize + searchHeight + 2 + (4 * borderPadding));
+		return guiProperties.getScreenHeight() / 3 - (buttonSize + searchHeight + 2 + (4 * borderPadding));
 	}
 
 	private int getColumns() {
